@@ -1,0 +1,3 @@
+/Users/eugensolopov/code/clion/Automath/cmake-build-debug/CMakeFiles/Automath.dir
+/Users/eugensolopov/code/clion/Automath/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/eugensolopov/code/clion/Automath/cmake-build-debug/CMakeFiles/rebuild_cache.dir

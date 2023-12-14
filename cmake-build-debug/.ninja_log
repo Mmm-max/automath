@@ -1,0 +1,4 @@
+# ninja log v5
+0	48	1702553542997554373	build.ninja	462d418bceddf423
+3	193	1702550834264176394	Automath	fca3c3dadbf227ee
+14	731	1702550821607730367	CMakeFiles/Automath.dir/automath.cpp.o	e03494fa031cc0c2
