@@ -145,6 +145,9 @@ vector<double> crossover (vector<double> parent1, vector<double> parent2) {
 
 //function to transorm a binary double to decimal double
 double binaryToDouble(string binary) {
+    if (binary[0] == '-') {
+        return -binaryToDouble(binary.substr(1, binary.length() - 1));
+    }
     double decimal = 0;
     unsigned length = binary.length();
     if (length < 16) {
