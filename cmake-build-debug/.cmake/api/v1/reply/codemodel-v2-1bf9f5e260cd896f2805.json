@@ -1,0 +1,60 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.26"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "Automath",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "Automath::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Automath-Debug-8f0323d62aa3a65ae132.json",
+					"name" : "Automath",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/nikitatishin/\u0423\u0447\u0435\u0431\u0430/\u041f\u0440\u043e\u0433\u0430/Cpp projects/Automath/cmake-build-debug",
+		"source" : "/Users/nikitatishin/\u0423\u0447\u0435\u0431\u0430/\u041f\u0440\u043e\u0433\u0430/Cpp projects/Automath"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 5
+	}
+}

@@ -1,0 +1,3 @@
+/Users/nikitatishin/Учеба/Прога/Cpp projects/Automath/cmake-build-debug/CMakeFiles/Automath.dir
+/Users/nikitatishin/Учеба/Прога/Cpp projects/Automath/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/nikitatishin/Учеба/Прога/Cpp projects/Automath/cmake-build-debug/CMakeFiles/rebuild_cache.dir
