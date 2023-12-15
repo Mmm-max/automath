@@ -4,11 +4,12 @@
 #include<vector>
 #include<random>
 #include<cmath>
+#include<cstdlib>
 #include <unordered_map>
 
-#define POPULATION_SIZE 1000
-#define NUMBER_OF_PARENTS 100
-#define GENERATIONS 100
+#define POPULATION_SIZE 100
+#define NUMBER_OF_PARENTS 10
+#define GENERATIONS 10
 
 using namespace std;
 
@@ -42,13 +43,15 @@ double func(double x, double y) {
 vector<vector<double> > firstPopulation() {
     vector<vector<double> > population;
     for (int i = 0; i < POPULATION_SIZE; i++) {
-        vector<double> individual = randomDoubles(2);
+        vector<double> individual;
+        individual.push_back(((double)rand() / RAND_MAX) * 2000.0 - 1000.0);
+        individual.push_back(((double)rand() / RAND_MAX) * 2000.0 - 1000.0);
         population.push_back(individual);
     }
     return population;
 }
 
-vector<double> randomDoubles(int size) {
+/*vector<double> randomDoubles(int size) {
     vector<double> randomDoubles;
     double lowerBound = -100;
     double upperBound = 100;
@@ -62,7 +65,7 @@ vector<double> randomDoubles(int size) {
         randomDoubles.push_back(randomDouble);
     }
     return randomDoubles;
-}
+}*/
 
 vector<string> manyDoublesToBinaries (vector<double> doubles) {
     vector<string> binaries;
@@ -73,6 +76,9 @@ vector<string> manyDoublesToBinaries (vector<double> doubles) {
 }
 
 string doubleToBinary(double x) {
+    if (x < 0) {
+        return "-" + doubleToBinary(-x);
+    }
     int count = 0;
     string binary = "";
     int integer = (int) x;
@@ -116,56 +122,35 @@ double fitness(vector<double> individual) {
 
 vector<double> crossover (vector<double> parent1, vector<double> parent2) {
     string parent1XGene = doubleToBinary(parent1[0]);
-    cout << "parent1XGene: " << binaryToDouble(parent1XGene) << endl;
     string parent1YGene = doubleToBinary(parent1[1]);
-    cout << "parent1YGene: " << parent1YGene << endl;
     string parent2XGene = doubleToBinary(parent2[0]);
     string parent2YGene = doubleToBinary(parent2[1]);
     vector<double> child;
     short crossoverPoint = rand() % 16;
     string childXGene = parent1XGene.substr(0, crossoverPoint) + parent2XGene.substr(crossoverPoint, 16);
     string childYGene = parent2YGene.substr(0, crossoverPoint) + parent1YGene.substr(crossoverPoint, 16);
-    child.push_back(stod(childXGene, nullptr));
-    cout << "childXGene: " << binaryToDouble(childXGene) << endl;
-    child.push_back(stod(childYGene, nullptr));
-    cout << "childYGene: " << stod(childYGene, nullptr) << endl;
+    child.push_back(binaryToDouble(childXGene));
+    child.push_back(binaryToDouble(childYGene));
 
+    cout << "Child x: " << child[0] << endl;
+    cout << "Child y: " << child[1] << endl;
     return child;
 }
 
 double binaryToDouble(string binary) {
+    if (binary[0] == '-') {
+        return -binaryToDouble(binary.substr(1, binary.length() - 1));
+    }
     double decimal = 0;
+    int x;
     unsigned length = binary.length();
-    if (length < 16) {
-        for (int i = 0; i < 16 - length; i++) {
-            binary += "0";
-        }
-    }
+    int ind_of_point = binary.find('.');
+    binary.erase(ind_of_point, 1);
     for (int i = 0; i < length; i++) {
-        if (binary[i] == '.') {
-            length--;
-        }
+        x = binary[i] == '1';
+        decimal += x * pow(2, ind_of_point - i - 1);
     }
-    int count = 0;
-    int integer = 0;
-    double fraction = 0;
-    while (binary[count] != '.' && count < 16) {
-        count++;
-    }
-    int copy = count - 1;
-    while (copy >= 0) {
-        integer += pow(2, copy) * (binary[copy] - '0');
-        copy--;
-    }
-    count++;
-    while (count < 16) {
-        fraction += pow(2, copy) * (binary[count] - '0');
-        count++;
-        copy--;
-    }
-    decimal = integer + fraction;
-    cout << decimal << endl;
-    return 0;
+    return decimal;
 }
 
 vector<double> mutation(vector<double> child) {
@@ -195,6 +180,7 @@ vector<vector<double> > selection(vector<vector<double> > population, int mutati
     vector<vector<double> > children;
     for (int i = 0; i < POPULATION_SIZE; i++) {
         fitnessMap.insert({fitness(population[i]), population[i]});
+        cout << "Individual fitness: " << fitness(population[i]) << endl;
         fitnessVector.push_back(fitness(population[i]));
     }
     sort(fitnessVector.begin(), fitnessVector.end());
@@ -221,7 +207,7 @@ vector<vector<double> > selection(vector<vector<double> > population, int mutati
         if (randomInteger < mutationProbability) {
             children[i] = mutation(children[i]);
         }
-        cout << "Child " << i << ": " << children[i][0] << " " << children[i][1] << endl;
+        //cout << "Child " << i << ": " << children[i][0] << " " << children[i][1] << endl;
     }
     return children;
 }
