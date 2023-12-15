@@ -85,6 +85,9 @@ vector<double> randomDoubles(int size) {
 }
 
 string doubleToBinary(double x) {
+    if (x < 0) {
+        return "-" + doubleToBinary(-x);
+    }
     int count = 0;
     string binary = "";
     int integer = (int) x;
