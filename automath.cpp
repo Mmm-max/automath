@@ -127,8 +127,9 @@ vector<double> crossover (vector<double> parent1, vector<double> parent2) {
     string parent2YGene = doubleToBinary(parent2[1]);
     vector<double> child;
     short crossoverPoint = rand() % 16;
-    string childXGene = parent1XGene.substr(0, crossoverPoint) + parent2XGene.substr(crossoverPoint, 16);
-    string childYGene = parent2YGene.substr(0, crossoverPoint) + parent1YGene.substr(crossoverPoint, 16);
+    // test
+    string childXGene = parent1XGene.substr(0, crossoverPoint) + parent2XGene.substr(crossoverPoint, parent2XGene.length() - crossoverPoint);
+    string childYGene = parent2YGene.substr(0, crossoverPoint) + parent1YGene.substr(crossoverPoint, parent2YGene.length() - crossoverPoint);
     child.push_back(binaryToDouble(childXGene));
     child.push_back(binaryToDouble(childYGene));
 
